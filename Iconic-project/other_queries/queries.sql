@@ -17,10 +17,11 @@ SELECT
     (total_order_completed / total_checkout_started) * 100 AS checkout_started_to_order_completed_percentage
 FROM
     total;
--- Cart abadonment
+-- Cart Abandonment
 SELECT (SUM(total_orders) - SUM(total_order_completed)) / SUM(total_orders) AS cart_abandonment_rate
 FROM
     summary_table;
+-- Average CheckoutStarted -> OrderCompleted
 SELECT
     AVG(
         EXTRACT(
