@@ -1,0 +1,33 @@
+Quesiton 1) Can you identify some data quality issues within all the three sources that have been provided and cleaned before any further transformation or analysis is done.
+
+Dataset 1: Users
+    - Addresses Column includes other keys other values other than address i.e first_name, last_name. I ignore these fields in the analysis and only extract the required.
+    - The JSON format is a little strange. JSON uses double quotes for key names and string values. Also, Boolean values are represented as true or false in JSON (all lowercase). I fixed this and extracted the information above.
+Dataset 2: products
+    - The stock and price column has some negative values. As stated in the task description "stock is always positve". Therefore I made these values positive by taking the absolute value. However, in a real situation these should be further investigated to avoid false stock values.
+    - gender affinity has null values. This may not be an error, but for data quality these null values should  perhaps be filled with something else for example neutral.
+Dataset 3: Interactions
+    - The timestamp is a unix timestamp. This should be converted especially for readability and reporting purposes.
+    - Discount field is also applied to other events when it states the discount should be applied on the order completed event.
+    - user_id is null many times and therefore I have removed these customer events.
+    - I noticed that a user for the item has mutliple of the same events firing at the exact same time. I remove these duplications.
+
+
+other assumptions:
+- 30min activity window
+- within a session if the same event fires twice i take the max timestamp. this mainly only happens with the product viewed event.
+- If a discount is applied at any step within the transaction journey then the discount is true for that journey.
+- After analysis, it seems the order completed and product added event never fires the same time across a the same user on a different product. We assume one product type per order.
+- After analysis we can see the product added event never fires multiple times within the same session therefore we assume an order contains 1 qty of the product.
+
+
+
+
+
+
+- total orders - order completed / total orders = abandonment
+
+3. fast 
+
+
+

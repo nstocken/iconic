@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: public
+    database: postgres
+    description: Postgres DB
+    tables:
+      - name: products
+      - name: interactions
+      - name: users
